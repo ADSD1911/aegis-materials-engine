@@ -3,7 +3,7 @@ import pandas as pd
 import py3Dmol
 from pymatgen.core import Composition
 from doe_engine import DoEEngine
-from stmol import showmol
+
 from post_processing import apply_correction_pipeline
 from matminer.featurizers.conversions import StrToComposition
 from matminer.featurizers.composition import ElementProperty
@@ -841,7 +841,7 @@ with tab2:
                 
                 if auto_spin: view.spin("y", 0.5) 
                 view.zoomTo()
-                showmol(view, height=450, width=800)
+                components.html(view._make_html(), height=450, width=800)
 
 
             st.write("") # Spacer
