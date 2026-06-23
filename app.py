@@ -33,9 +33,20 @@ from scipy.special import erf
 from scipy.integrate import solve_ivp
 from PIL import Image
 
+import zipfile
+#data 
 
 
 
+if not os.path.exists("structure_db"):
+    with st.spinner("Loading structure database — first run only, takes ~2 minutes..."):
+        urllib.request.urlretrieve(
+            "https://huggingface.co/datasets/ADSD27/aegis-structure-db/resolve/main/structure_db.zip",
+            "structure_db.zip"
+        )
+        with zipfile.ZipFile("structure_db.zip", "r") as z:
+            z.extractall(".")
+        os.remove("structure_db.zip")
 # UI/UX 
 
 try:
