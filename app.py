@@ -1150,7 +1150,7 @@ with tab3:
 
 
     if "groq_api_key" not in st.session_state:
-        st.session_state.groq_api_key = ""
+        st.session_state.groq_api_key = os.environ.get("GROQ_API_KEY", "")
     if "active_groq_model" not in st.session_state:
         st.session_state.active_groq_model = "llama-3.3-70b-versatile"
     if "ai_chat_history" not in st.session_state:
