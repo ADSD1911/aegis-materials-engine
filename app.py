@@ -1232,7 +1232,7 @@ with tab3:
     with right_col:
         with st.container(border=True):
             st.markdown("##### Intelligence Config")
-            st.text_input("Groq API Key:", type="password", key="groq_api_key", placeholder="gsk_...")
+
             st.selectbox("Groq Model:", 
                          ["llama-3.3-70b-versatile", "llama3-8b-8192", "mixtral-8x7b-32768"],
                          key="active_groq_model",
