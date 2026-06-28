@@ -40,13 +40,18 @@ import zipfile
 
 if not os.path.exists("structure_db"):
     with st.spinner("Loading structure database — first run only, takes ~2 minutes..."):
-        urllib.request.urlretrieve(
-            "https://huggingface.co/datasets/ADSD27/aegis-structure-db/resolve/main/structure_db.zip",
-            "structure_db.zip"
-        )
-        with zipfile.ZipFile("structure_db.zip", "r") as z:
-            z.extractall(".")
-        os.remove("structure_db.zip")
+        try:
+            url = "https://github.com/ADSD1911/aegis-materials-engine/releases/download/v1.0/structure_db.zip"
+            response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, stream=True, timeout=300)
+            response.raise_for_status()
+            with open("structure_db.zip", "wb") as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+            with zipfile.ZipFile("structure_db.zip", "r") as z:
+                z.extractall(".")
+            os.remove("structure_db.zip")
+        except Exception as e:
+            st.warning(f" Structure database unavailable. 3D viewer limited this session. All other features work normally.")
 # UI/UX 
 
 try:
